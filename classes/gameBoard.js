@@ -1,7 +1,7 @@
 class GameBoard {
     constructor () {
-        this.row = 20;
-        this.col = 20;
+        this.row = 8;
+        this.col = 8;
         this.matrix = Array.from(
             { length: this.row }, () => Array(this.col).fill(null));
 
@@ -14,6 +14,8 @@ class GameBoard {
             return true;
         if (i == this.row || j==this.col)
             return false;
+        if (this.matrix[i][j] !== null)
+            return false;
         //recursive cases
 
         this.matrix[i][j] = ship;
@@ -22,11 +24,11 @@ class GameBoard {
         if (isX_axis) {
             isValid = this.#placeValue (ship, len-1, i, j+1, true);
         } else {
-            isValid = this.#placeValue (ship, len-1, i+1, j, true);
+            isValid = this.#placeValue (ship, len-1, i+1, j, false);
         }
 
         if (!isValid)
-            this.matrix = null;
+            this.matrix[i][j] = null;
         return isValid;
     }
 

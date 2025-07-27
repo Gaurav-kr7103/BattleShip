@@ -13,10 +13,10 @@ test("at location 0,0 length 21" , ()=> {
     expect(gmb.placeShip(ship,0,0,'x')).toBe("ship not placed");
 })
 
-test("at location 18,0, length 2" , ()=> {
+test("at location 6,0, length 2" , ()=> {
     const gmb = new GameBoard();
     const ship = new Ship(2);
-    expect(gmb.placeShip(ship,18,0,'y')).toBe("ship placed");
+    expect(gmb.placeShip(ship,6,0,'y')).toBe("ship placed");
 })
 
 test("attack at 0,0 (1 length ship there)", () => {
