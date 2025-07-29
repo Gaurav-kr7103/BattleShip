@@ -12,7 +12,7 @@ class GameBoard {
         //base cases
         if (len === 0)
             return true;
-        if (i == this.row || j==this.col)
+        if (i >= this.row || j >= this.col)
             return false;
         if (this.matrix[i][j] !== null)
             return false;

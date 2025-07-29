@@ -52,5 +52,5 @@ h1 {
 .play-area > div {
     background-color: #ccc; /* so you can see the squares */
     aspect-ratio: 1 / 1;
-    outline: 3px solid white;
+    outline: 2px solid white;
 }

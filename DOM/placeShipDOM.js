@@ -37,8 +37,11 @@ function cellActions() {
     })
 }
 
+let gmb = new GameBoard();
+
 const shipLength = [5,4,4,3,3,2,2,2];
 let s = 0;
+
 function updateShipDisplay () {
     
     const shipLenDisplay = document.querySelector('.sidebar > h3');
@@ -56,36 +59,43 @@ function placeShipLoc (cell) {
         updateShipDisplay();
         return;
     }
-    let ship = new Ship (shipLength[s++]);
+    let ship = new Ship (shipLength[s]);
     const row = Number(cell.dataset.x);
     const col = Number(cell.dataset.y);
     const axis = axisRotation.value;
-    cell.dataset.status = "occupied";
     const res = gmb.placeShip(ship, row, col, axis);
     if (res === "ship placed") {
+        cell.dataset.status = "occupied";
         UpdateUi(gmb, ship);
+        s++;
     } else {
-        const prevColor = cell.style.backgroundColor;
         cell.style.backgroundColor = "red";
         setTimeout(() => {
-            cell.style.backgroundColor = prevColor;
+            if (cell.dataset.status === 'unoccupied') {
+                cell.style.backgroundColor = "#ccc";
+            } else {
+                cell.style.backgroundColor = "blue";
+                console.log("blue");
+            }
         }, 1000);
     }
     updateShipDisplay();
 }
 
 
-let gmb = new GameBoard();
 function UpdateUi (gmb, ship) {
     for (let i=0; i<8; i++) {
         for (let j=0; j<8; j++) {
             if (gmb.matrix[i][j] !== null) {
                 const cell = document.querySelector(`[data-x="${i}"][data-y="${j}"]`);
                 cell.style.backgroundColor = "blue";
+                cell.style.outline = "2px solid white";
                 cell.dataset.status = "occupied";
             }
         }
     }
 }
+
+
 
 export {addingCells};

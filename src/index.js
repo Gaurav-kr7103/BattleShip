@@ -1,4 +1,6 @@
 import "./styles.css";
-import { addingCells } from "./dom";
+import { addingCells } from "../DOM/placeShipDOM";
+import { dynamicHover } from "../DOM/mouseHover" 
 
 addingCells();
+dynamicHover();
