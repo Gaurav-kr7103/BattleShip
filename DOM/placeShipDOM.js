@@ -12,32 +12,31 @@ axisRotation.addEventListener("click", ()=> {
 });
 
 
-function addingCells() {
-    const boxParent = document.querySelectorAll(".play-area");
-    boxParent.forEach((Box)=> {
-        for (let i = 0; i < 64; i++) {
-            const square = document.createElement("div");
-            square.dataset.x = Math.floor(i / 8);
-            square.dataset.y = i % 8;
-            square.dataset.status = 'unoccupied';
-            square.setAttribute("class", "cell");
-            Box.appendChild(square);
-        }
-    }) 
-    cellActions();
+function addingCells(toggle, gmb) {
+    const val = toggle?1:2;
+    const selector = `.play-area.p${val}`;
+
+    const boxParent = document.querySelector(selector);
+    for (let i = 0; i < 64; i++) {
+        const square = document.createElement("div");
+        square.dataset.x = Math.floor(i / 8);
+        square.dataset.y = i % 8;
+        square.dataset.status = 'unoccupied';
+        square.setAttribute("class", "cell");
+        boxParent.appendChild(square);
+    }
+    cellActions(selector,gmb);
 } 
 
-function cellActions() {
-    const cells = document.querySelectorAll('.cell');
+function cellActions(selector, gmb) {
+    const cells = document.querySelectorAll(`${selector} .cell`);
     cells.forEach((cell) => {
             cell.addEventListener(('click'), ()=> {
             console.log("cell clicked");
-            placeShipLoc(cell);
+            placeShipLoc(cell,gmb);
         });
     })
 }
-
-let gmb = new GameBoard();
 
 const shipLength = [5,4,4,3,3,2,2,2];
 let s = 0;
@@ -54,7 +53,7 @@ function updateShipDisplay () {
     shipLenDisplay.textContent = sizeDisplay;
 }
 
-function placeShipLoc (cell) {
+function placeShipLoc (cell, gmb) {
     if (s == shipLength.length) {
         updateShipDisplay();
         return;

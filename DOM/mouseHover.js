@@ -1,4 +1,7 @@
-function dynamicHover () {
+function dynamicHover (toggle) {
+
+    const val = toggle ? 1 : 2;
+    const selector = `.play-area.p${val}`;
 
     function getLenOfShip () {
         let txt = document.querySelector('.sidebar > h3').textContent;
@@ -18,7 +21,7 @@ function dynamicHover () {
     function getArray (cell) {
         const len = getLenOfShip();
         if (Number.isNaN(len))
-            alert("Length of Ship is wrong");
+            alert("All ships Placed for player");
         const axis = getAxis();
 
         const x = Number(cell.dataset.x);
@@ -33,7 +36,7 @@ function dynamicHover () {
                     color = "red";
                     break;
                 }
-                const cell = document.querySelector(`[data-x="${x}"][data-y="${j}"]`);
+                const cell = document.querySelector(`${selector} [data-x="${x}"][data-y="${j}"]`);
                 if (!cell)
                     alert("Cell not found for prediction");
                 if (cell.dataset.status === 'occupied') {
@@ -47,7 +50,7 @@ function dynamicHover () {
                     color = "red";
                     break;
                 }
-                const cell = document.querySelector(`[data-x="${i}"][data-y="${y}"]`);
+                const cell = document.querySelector(`${selector} [data-x="${i}"][data-y="${y}"]`);
                 if (!cell)
                     alert("Cell not found for prediction");
                 if (cell.dataset.status === 'occupied') {
@@ -61,12 +64,12 @@ function dynamicHover () {
 
     function displayFutureValues (cellArray, color) {
         cellArray.forEach(({x,y}) => {
-            const cell = document.querySelector(`[data-x="${x}"][data-y="${y}"]`);
+            const cell = document.querySelector(`${selector} [data-x="${x}"][data-y="${y}"]`);
             cell.style.outline = `2px solid ${color}`;
         })
     }
 
-    const cells = document.querySelectorAll(".cell");
+    const cells = document.querySelectorAll(`${selector} .cell`);
     //at each cell
     cells.forEach((cell) => {
         let backArr = [];
