@@ -1,3 +1,5 @@
+# Live Preview
+  https://gaurav-kr7103.github.io/BattleShip/
 # Battleship Game
 
 A classic Battleship game implemented in JavaScript, utilizing OOP principles and DOM manipulation for interactive gameplay between two players.
