@@ -1,62 +1,72 @@
-# webpack-template
-a blueprint of the configuration of weback to minimize time to effectively jump in the code
+# Battleship Game
+
+A classic Battleship game implemented in JavaScript, utilizing OOP principles and DOM manipulation for interactive gameplay between two players.
+
+## Overview
+
+This project recreates the traditional Battleship game where two players take turns placing ships on an 8x8 grid and attack each other’s fleets until all ships of one player are destroyed.
+
+## Features
+
+- Object-oriented design with classes:
+  - `Ship` class manages length, hits, and sunk status.
+  - `GameBoard` class manages ship placement, attacks, and tracking sunk ships.
+  - `Player` class holds player identity and manages their board.
+- Interactive ship placement with rotation of axis (`x` or `y`).
+- Dynamic hover effects highlighting potential ship placement areas.
+- Turn-based attack system with visual feedback for hits, misses, and destroyed ships.
+- Game flow control with async/await to await player actions sequentially.
+- Responsive UI updates reflecting current game state and player actions.
+
+## Technologies Used
+
+- JavaScript (ES6 modules)
+- HTML / CSS for UI layout and styling
+- DOM API for dynamic interaction handling and event-driven updates
+
+## Installation / Usage
+
+1. Clone this repository to your local machine:
+
+2. Open `index.html` directly in a modern web browser that supports ES6 modules.
+
+3. For better module support, run a local HTTP server (such as with node http-server):
 
 
+4. Navigate to the displayed local URL in your browser.
 
-Steps that are done->
-Step1> in terminal `npm init -y` (it makes package.json file)
+5. Play the game! Follow on-screen prompts to place your ships and launch attacks against your opponent.
 
-Step2> install bundlers `npm install --save-dev webpack webpack-cli`(it installs webpack package in node_modules)
+## Game Instructions
 
-Step3> make your direction and in that index.js
+### Ship Placement
 
-Step4> Create webpack.config.js file (basically instruction on how to bundle files VVIMP)
+- Players alternate turns placing ships by clicking on their grid.
+- Use the **Rotate Axis** button to switch ship orientation (horizontal or vertical).
+- When hovering over the grid, cells highlight to show potential ship placement areas.
+- Invalid placements are rejected and visually indicated (red highlight).
+- Place all ships before moving on to the attack phase.
 
-Step5> hit `npx webpack` to Bundle everything into 'dist' directory if it does not exist it will make new 
+### Attack Phase
 
-Note-> Webpack only knows to bundle javascript files
-        Below is handling Html file
-Step6> hit `npm i -D html-webpack-plugin` (download packages in node_modules) 
-Note-> Html plugin will inject all your scripts into the HTML file
+- Players take turns clicking on the opponent’s grid to launch attacks.
+- Hits are displayed by turning cells black, misses turn cyan.
+- Once all ships of one player are sunk, the game ends.
 
-Step7> Create boiler plate inside src .. name it src (html plugin will auto connect the scripts to it.. no need to add script file to it)
-
-step8> add plugin to the webpack.config.js
-
-Step9> Similarly we will have to do for css since webpack is only .js file bundlers
-        hit `npm install --save-dev style-loader css-loader`... we actually need 2 packages for css
-    Note-> css loader takes .css files and convert it into js module (ex in js file we do-> `import "./syles.css";`)
-
-Step10> adding this to webpack.config.js as in module
-    Note-> plugins means extension of webpack and module means tranformation
-
-Step11> create `styles.css` in src directory
-    Remember to use `import` statement in js file to use the particular css file
+## Project Structure
 
 
-Step12> adding images 3 different ways
-    i> use `url` in css
-    ii> add images in html for that->
-        use `html loader package` module and config it in the webpack.config.js
-                hit`npm i -D html-loader`
-    iii> add images to js file.. for that->
-        add rules to configuration.
+- `classes/` contains core game logic classes.
+- `DOM/` contains DOM manipulation and event handling code.
+- `index.js` initializes the game and controls the game loop.
+- `styles.css` contains styling for the UI grid and elements.
+- `index.html` provides the page markup.
 
-        to use similary like css we import-> just do import
+## Future Improvements
 
-Step13> Created a asset folder inside the src directory where images will be 
-       stored locally.
+- Implement AI opponent for single-player mode.
+- Add animations and sound effects for enhanced user experience.
+- Improve responsiveness for multiple device sizes.
+- Include scoreboard, game statistics, or history tracking.
+- Add drag-and-drop ship placement for intuitive UI.
 
-
-Note->since every time change something we need to hit `npx webpack`
-to avoid this we add 1 more package which would 
-do the work only by reloading 
-
-Step14> install webpack dev server for auto (`npx webcheck`)
-hit `npm install --save-dev webpack-dev-server`
-(what it would it do is open the preview..whensover refreshed the changes will be reflected)
-
-Step15> Scripts are added to package.json
-
-Step16>making diving webpack.config.js into webpack.common.js, webpack.dev.js, webpack.prod.js
-       and changing the package.json script also
