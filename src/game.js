@@ -1,1 +1,0 @@
-let toggle = true;//true->means player 1 (placement of ship)
