@@ -2,11 +2,13 @@ import "./styles.css";
 import { addingCells } from "../DOM/placeShipDOM";
 import { Player } from "../classes/player";
 import { clearPlayArea } from "../DOM/clearBoard";
+import { attackPlayerShip } from "../DOM/attackShip";
 
 function createPlayerState () {
     return {
         player : new Player(),
-        shipLength :  [5,4,4,3,3,2,2,2],
+        // shipLength :  [5,4,4,3,3,2,2,2],
+        shipLength : [5,4,3],
         s : 0
     }
 }
@@ -21,6 +23,10 @@ const playerState1 = createPlayerState();
 const playerState2 = createPlayerState();
 let toggle = true;
 
+const playerTurn = {
+    isPlayer1Turn : true,
+}
+
 startGame();
 
 async function startGame () {
@@ -28,10 +34,22 @@ async function startGame () {
     await waitTillPlacementShip (toggle, playerState1);
     console.log("Player 1 ship placement done");
 
-    toggle = !toggle;
+    toggle = !toggle;//false
     console.log("player 2 starts placing ship")
     await waitTillPlacementShip (toggle, playerState2);
     console.log("Player 2 ship placement done");
+
+    while (true) {
+        // let attacker = playerTurn.isPlayer1Turn?playerState1 : playerState2;
+        let defender = playerTurn.isPlayer1Turn?playerState2 : playerState1;
+        try {
+            await attackPlayerShip (defender, playerTurn);
+        } catch (error) {
+            alert(error.message);
+            break;
+        }
+    }
+    
 }
 
 function waitTillPlacementShip (toggle, playerState) {
