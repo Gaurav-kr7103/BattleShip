@@ -7,8 +7,7 @@ import { attackPlayerShip } from "../DOM/attackShip";
 function createPlayerState () {
     return {
         player : new Player(),
-        // shipLength :  [5,4,4,3,3,2,2,2],
-        shipLength : [5,4,3],
+        shipLength :  [5,4,4,3,3,2,2,2],
         s : 0
     }
 }
